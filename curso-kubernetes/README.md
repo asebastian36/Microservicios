@@ -636,3 +636,13 @@ En algunos casos, especialmente con PostgreSQL, se han reportado problemas relac
     - Como has hecho (`server.port=8001` y `server.port=8002`), asegúrate de que cada microservicio tenga un puerto único para evitar conflictos.
 
 ---
+
+## Relacionando los servicios
+
+[relacionando los servicios](./images/relacionando-servicios.png
+
+### Como relacionarlos
+
+Gracias a una tabla intermedia en el microservicio `Curso` que se llame `CursoUsuario`.
+
+[como relacionar los servicios](./images/como-relacionar-servicios.png)

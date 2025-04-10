@@ -1,6 +1,7 @@
 package org.asebastian36.springcloud.msvc.cursos.services;
 
-import org.asebastian36.springcloud.msvc.cursos.entity.Curso;
+import org.asebastian36.springcloud.msvc.cursos.models.Usuario;
+import org.asebastian36.springcloud.msvc.cursos.models.entity.Curso;
 import java.util.*;
 
 public interface CursoService {
@@ -8,4 +9,10 @@ public interface CursoService {
     Optional<Curso> porId(Long id);
     void eliminar(Long id);
     Curso guardar(Curso curso);
+
+    //  logica de negocio hacia otro servicio
+    Optional<Usuario> asignarUsuario(Usuario usuario, Long cursoId);
+    Optional<Usuario> crearUsuario(Usuario usuario, Long cursoId);
+    Optional<Usuario> eliminarUsuario(Usuario usuario, Long cursoId);
+
 }
