@@ -646,3 +646,25 @@ En algunos casos, especialmente con PostgreSQL, se han reportado problemas relac
 Gracias a una tabla intermedia en el microservicio `Curso` que se llame `CursoUsuario`.
 
 [como relacionar los servicios](./images/como-relacionar-servicios.png)
+
+## Docker
+
+### Introduccion
+
+Docker es una plataforma de contenedores, herramienta que crea y administra contenedores.
+
+> Contenedor: Similar a una caja de herramientas aislada, porcion de un s.o para ejecutar aplicaciones en un host.
+
+Es un empaquetado de codigo y dependencias para ejecutar ese codigo, la aplicacion.
+
+Un mismo contenedor que se ejecuta siempre debe reproducir exactamente el mismo comportamiento de la aplicacion, sin importar donde o quien lo ejecuta.
+
+> Imagen: Plantilla para crear contenedores.
+
+### Ventajas de los contenedores
+
+* Permite tener diferentes ambientes de desarrollo y produccion, que funcione en ambos.
+* Permite tener ambientes de desarrollo y versiones en un equipo de desarrollo.
+
+`sudo docker images`: Listar imagenes.
+`sudo docker ps`: Listas contenedores.
