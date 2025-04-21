@@ -7,6 +7,12 @@ import java.util.*;
 public interface CursoService {
     List<Curso> listar();
     Optional<Curso> porId(Long id);
+
+    //  logica de negocio hacia el cliente
+    Optional<Curso> porIdConUsuarios(Long
+                                             id);
+    void eliminarCursoUsuarioporId(Long id);
+
     void eliminar(Long id);
     Curso guardar(Curso curso);
 

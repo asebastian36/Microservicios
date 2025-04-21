@@ -9,4 +9,5 @@ public interface UsuarioService {    List<Usuario> listar();
     void eliminar(Long id);
     Optional<Usuario> porEmail(String email);
     boolean existsByEmail(String email);
+    List<Usuario> getByIds(Iterable<Long> ids);
 }

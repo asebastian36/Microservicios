@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CursoServiceImpl implements CursoService {
@@ -103,5 +104,33 @@ public class CursoServiceImpl implements CursoService {
             return Optional.of(usuarioMsvc);
         }
 
-        return Optional.empty();    }
+        return Optional.empty();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Curso> porIdConUsuarios(Long id) {
+        Optional<Curso> o = repository.findById(id);
+
+        if( o.isPresent() ) {
+            Curso curso = o.get();
+
+            if( !curso.getCursoUsuarios().isEmpty() ) {
+                List<Long> ids = curso.getCursoUsuarios().stream().map(CursoUsuario::getUsuarioId).toList();
+
+                List<Usuario> usuarios = client.usuariosPorCurso(ids);
+                curso.setUsuarios(usuarios);
+            }
+
+            return Optional.of(curso);
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    @Transactional
+    public void eliminarCursoUsuarioporId(Long id) {
+        repository.eliminarCursoUsuarioporId(id);
+    }
 }

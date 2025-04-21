@@ -25,7 +25,7 @@ public class CursoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> detalle(@PathVariable Long id) {
-        Optional<Curso> o = service.porId(id);
+        Optional<Curso> o = service.porIdConUsuarios(id);   //  service.porId(id);
 
         if( o.isPresent() ) return ResponseEntity.ok(o.get());
 
@@ -118,5 +118,11 @@ public class CursoController {
         result.getFieldErrors().forEach(error -> errors.put(error.getField(), "El campo " + error.getField() + " " +error.getDefaultMessage()));
 
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @DeleteMapping("/eliminar-curso-usuario/{id}")
+    public ResponseEntity<?> eliminarCursoUsuarioporId(@PathVariable Long id) {
+        service.eliminarCursoUsuarioporId(id);
+        return ResponseEntity.noContent().build();
     }
 }
