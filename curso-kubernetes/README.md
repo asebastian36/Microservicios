@@ -440,7 +440,7 @@ Este controlador implementa operaciones CRUD para la entidad `Usuario` utilizand
 
 ## Explicacion de propiedades del `application.properties` que no conocia
 
-¡Claro! Vamos a analizar qué hacen estas dos propiedades en el archivo `application.properties` de un proyecto Spring Boot. Ambas están relacionadas con la configuración de la base de datos y el logging, específicamente cuando se trabaja con **JPA** (Java Persistence API) y **Hibernate**.
+Qué hacen estas dos propiedades en el archivo `application.properties` de un proyecto Spring Boot. Ambas están relacionadas con la configuración de la base de datos y el logging, específicamente cuando se trabaja con **JPA** (Java Persistence API) y **Hibernate**.
 
 ---
 
@@ -659,12 +659,75 @@ Es un empaquetado de codigo y dependencias para ejecutar ese codigo, la aplicaci
 
 Un mismo contenedor que se ejecuta siempre debe reproducir exactamente el mismo comportamiento de la aplicacion, sin importar donde o quien lo ejecuta.
 
+[Problemas que resuelven los contenedores](./images/problemas.png)
+
 > Imagen: Plantilla para crear contenedores.
 
 ### Ventajas de los contenedores
 
-* Permite tener diferentes ambientes de desarrollo y produccion, que funcione en ambos.
-* Permite tener ambientes de desarrollo y versiones en un equipo de desarrollo.
+[Ventajas dee usar contenedores](./images/ventajas.png)
 
 `sudo docker images`: Listar imagenes.
 `sudo docker ps`: Listas contenedores.
+
+### Arquitectura de contenedores
+
+[arquitectura de contenedores Docker](./images/arquitectura.png)
+
+### Contenedores vs maquinas virtuales
+
+[Comparativa entre contenedores y maquinas virturales](./images/comparativa-c-m.png)
+
+### Diferencias entre imagenes y contenedores
+
+[Distincion entre imagenes y contenedores](./images/comparativa-i-c.png)
+
+### Ejemplo de la arquitectura de un contenedor spring boot
+
+[Arquitectura de un proyecto spring boot con Docker](./images/arquitectura-ejemplo.png)
+
+### Dockerizando el proyecto
+
+Comando para generar el `.jar` necesario:
+
+> En la raiz de cada microservicio
+
+```shell
+
+//  opcion 1
+mvn clean package
+
+//  opcion 2
+./mvn clean package
+```
+
+Una vez obtenido el `.jar` podemos levantar el servicio con el comando:
+
+```shell 
+java -jar ./target/msvc-usuarios-0.0.1-SNAPSHOT.jar
+```
+
+### Creacion de la imagen para Docker del proyecto
+
+Hay dos maneras para acceder a imagenes, utilizando una de `Docker hub` o crear una con un `Dockerfile`.
+
+se crea el archivo en la raiz del microservicio, una vez se tiene el archivo listo, se ejecuta el siguiente comando para generar el contenedor:
+
+```shell
+docker build .
+```
+
+Si se genera la imagen de manera adecuada, revisamos que este disponible la imagen con el siguiente comando:
+
+```shell
+docker images
+```
+
+Si la imagen esta disponible en la lista se ejecuta con el id que tiene la imagen:
+
+```shell
+docker run 58f1f359dc92
+```
+
+> Da error al intentar acceder a la bd desde docker se hace cambio en la cadena de conexion: `spring.datasource.url=jdbc:mysql://host.docker.internal:3306/msvc_usuarios?serverTimezone=America/Mexico_City&allowPublicKeyRetrieval=false`
+
