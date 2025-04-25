@@ -729,5 +729,19 @@ Si la imagen esta disponible en la lista se ejecuta con el id que tiene la image
 docker run 58f1f359dc92
 ```
 
-> Da error al intentar acceder a la bd desde docker se hace cambio en la cadena de conexion: `spring.datasource.url=jdbc:mysql://host.docker.internal:3306/msvc_usuarios?serverTimezone=America/Mexico_City&allowPublicKeyRetrieval=false`
+> Da error al intentar acceder a la bd desde docker, para arreglarlo, se hace cambio en la cadena de conexion: `spring.datasource.url=jdbc:mysql://host.docker.internal:3306/msvc_usuarios?serverTimezone=America/Mexico_City&allowPublicKeyRetrieval=false`
+
+Nuevo comando para generar el `.jar` una vez hecho el cambio:
+
+```shell
+mvn clean package -DskipTests
+```
+
+> Ese comando genera el `.jar` omitiendo las pruebas.
+
+Despues se ejecute con este comando (desde linux):
+
+```shell
+sudo docker run --network="host" 1657e9ceac1e
+```
 
